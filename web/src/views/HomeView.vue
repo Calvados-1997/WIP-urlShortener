@@ -11,12 +11,10 @@ const createURL = (): void => {
 </script>
 
 <template>
-  <div
-    class="w-110 flex flex-col gap-7 pt-10 pb-20 px-6 bg-slate-800 rounded-3xl border-slate-300 shadow-2xl"
-  >
+  <div class="w-110 flex flex-col py-10 px-6 bg-slate-800 rounded-3xl border-slate-300 shadow-2xl">
     <label class="text-sm font-medium text-slate-300" for="url">URLを入力</label>
-    <InputText v-model="inputURL" id="url" :placeholder="'ようこそ'" />
-    <SimpleButton @click="createURL">URLを作成</SimpleButton>
+    <InputText class="mt-2" v-model="inputURL" id="url" :placeholder="'ようこそ'" />
+    <SimpleButton class="mt-7" @click="createURL">URLを作成</SimpleButton>
   </div>
 </template>
 
