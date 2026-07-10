@@ -6,6 +6,7 @@ import HomeView from './views/HomeView.vue'
 <template>
   <MainLayout>
     <template #header>TODO: This is header area</template>
+    <template #subHeader>TODO: This is subHeader area</template>
     <template #content>
       <HomeView />
     </template>
