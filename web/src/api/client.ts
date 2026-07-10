@@ -15,13 +15,29 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   const resInfo: Promise<T> = res.json()
   return resInfo
 }
-
+/**
+ * HTTP クライアント
+ *
+ * @example
+ * // GETリクエスト（型引数でレスポンス型を指定）
+ * const data = await http.get<{ id: number; url: string }>('/urls/abc123')
+ *
+ * // POSTリクエスト
+ * const result = await http.post<{ shortUrl: string }>('/shorten', { url: 'https://example.com' })
+ *
+ * // カスタムヘッダーを付与する場合
+ * const data = await http.get<User>('/me', { Authorization: 'Bearer TOKEN' })
+ */
 export const http = {
-  get: <T>(path: string) => request<T>(path, { method: 'GET' }),
-  post: <T>(path: string, body: unknown) =>
-    request<T>(path, { method: 'POST', body: JSON.stringify(body) }),
-  put: <T>(path: string, body: unknown) =>
-    request<T>(path, { method: 'PUT', body: JSON.stringify(body) }),
-  delete: <T>(path: string, body: unknown) =>
-    request<T>(path, { method: 'DELETE', body: JSON.stringify(body) }),
+  get: <T>(path: string, customHeaders?: HeadersInit) =>
+    request<T>(path, { method: 'GET', headers: customHeaders }),
+
+  post: <T>(path: string, body: unknown, customHeaders?: HeadersInit) =>
+    request<T>(path, { method: 'POST', body: JSON.stringify(body), headers: customHeaders }),
+
+  put: <T>(path: string, body: unknown, customHeaders?: HeadersInit) =>
+    request<T>(path, { method: 'PUT', body: JSON.stringify(body), headers: customHeaders }),
+
+  delete: <T>(path: string, body: unknown, customHeaders?: HeadersInit) =>
+    request<T>(path, { method: 'DELETE', body: JSON.stringify(body), headers: customHeaders }),
 }
